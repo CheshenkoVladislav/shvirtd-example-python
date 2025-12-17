@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /opt
+
 if [ -d ".git" ]; then
     echo "является git репозиторием"
 else 
@@ -23,6 +25,7 @@ else
                 docker compose up
             fi
         else 
+            echo $command_output
             exit 1
         fi       
     fi
