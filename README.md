@@ -1,96 +1,28 @@
-# shvirtd-example-python
+## Задача 2
 
-Учебный проект FastAPI-приложения для изучения Docker Compose.
+<img width="757" height="670" alt="{DCD10697-DCEA-4D82-8233-8254B4FB27F3}" src="https://github.com/user-attachments/assets/ba348f0d-028e-42a3-839c-0b52799de361" />
+<img width="1193" height="239" alt="{4329A33F-9C9E-4FDF-8644-EBAB27DA2898}" src="https://github.com/user-attachments/assets/e07d2bc6-3cc4-4845-b2bc-f12c99d587e8" />
 
-## Описание проекта
+## Задача 3
 
-Это простое веб-приложение на FastAPI, предназначенное для изучения контейнеризации и работы с Docker Compose. Приложение демонстрирует:
+<img width="846" height="1060" alt="{5704CF8C-3F04-4A72-A840-016E9539D5AA}" src="https://github.com/user-attachments/assets/52446aa6-2f17-44f2-a551-58ec40245d67" />
 
-- Создание веб-сервиса на FastAPI
-- Подключение к базе данных MySQL
-- Работу с прокси-серверами (Nginx → HAProxy → FastAPI)
-- Корректную настройку сетей Docker
-- Передачу IP-адресов через заголовки прокси
+## Задача 4
 
-### Функциональность
+<img width="1612" height="1014" alt="{EDC5C5E4-8D0E-48EA-9DB2-E92620DCB915}" src="https://github.com/user-attachments/assets/d27d5713-9440-415c-a46d-fddec65d8035" />
 
-При обращении к главной странице приложение:
-1. Определяет IP-адрес клиента
-2. Записывает время запроса и IP-адрес в базу данных MySQL
-3. Возвращает эту информацию пользователю
+## Задача 5
 
-**Важно для обучения:** Если обращаться к приложению напрямую (минуя прокси), вы получите подсказку о неправильном выполнении задания.
+(Script)[https://github.com/CheshenkoVladislav/shvirtd-example-python/blob/main/start.sh]
+(Cron-task)[https://github.com/CheshenkoVladislav/shvirtd-example-python/blob/main/crontask.txt]
+<img width="1340" height="97" alt="{C7BABCF3-3C70-44B2-8D25-84E6B511360D}" src="https://github.com/user-attachments/assets/6c331eb8-2cb1-4325-8423-8bd7942e78e1" />
 
-## Способы запуска
+## Задача 6
 
-### 1. Запуск через Docker Compose
+<img width="1624" height="906" alt="hw5dive" src="https://github.com/user-attachments/assets/2aebb1f0-ab03-4207-918b-a25e9e0a1541" />
+<img width="1625" height="901" alt="{3ACD2147-81E8-4C4D-86D8-A9722840944B}" src="https://github.com/user-attachments/assets/934a0b0e-9d1c-49c6-ac43-a30f71d52326" />
 
-**Архитектура при запуске через Docker Compose:**
-```
-Клиент → Nginx (8090) → HAProxy (8080) → FastAPI App (5000) → MySQL
-```
+## Задача 6.1
 
-### 2. Локальный запуск для разработки
+<img width="1612" height="892" alt="hw5dockerCp" src="https://github.com/user-attachments/assets/2c0fa607-c3db-45a3-afc8-ea071e546eca" />
 
-```bash
-# Создайте виртуальное окружение
-python3 -m venv venv
-source venv/bin/activate  # в Windows: venv\Scripts\activate
-
-# Установите зависимости
-pip install -r requirements.txt
-
-# Настройте переменные окружения для подключения к БД(не забудьте отдельно запустить БД)
-export DB_HOST='127.0.0.1'
-export DB_USER='app'  
-export DB_PASSWORD='very_strong'
-export DB_NAME='example'
-
-# Запустите приложение
-uvicorn main:app --host 0.0.0.0 --port 5000 --reload
-```
-
-**Требования для локального запуска:**
-- Python 3.12+
-- Запущенный сервер MySQL
-- База данных и пользователь, настроенные согласно переменным окружения
-
-## Настройка базы данных MySQL
-
-```sql
-CREATE DATABASE example;
-CREATE USER 'app'@'localhost' IDENTIFIED BY 'very_strong';
-GRANT ALL PRIVILEGES ON example.* TO 'app'@'localhost';
-FLUSH PRIVILEGES;
-```
-
-## Доступные эндпоинты
-
-- `GET /` - главная страница (записывает запрос в БД и возвращает время + IP)
-- `GET /requests` - просмотр всех записей из базы данных  
-- `GET /debug` - отладочная информация о заголовках запроса
-- `GET /docs` - автоматическая документация FastAPI (Swagger UI)
-
-## Переменные окружения
-
-| Переменная | Значение по умолчанию | Описание |
-|------------|----------------------|----------|
-| `DB_HOST` | `127.0.0.1` | Хост базы данных MySQL |
-| `DB_USER` | `app` | Пользователь БД |
-| `DB_PASSWORD` | `very_strong` | Пароль БД |
-| `DB_NAME` | `example` | Имя базы данных |
-
-## Проверка работы
-
-```bash
-# При правильной настройке через прокси
-curl http://localhost:8090
-
-# При прямом обращении (НЕПРАВИЛЬНО) 
-curl http://localhost:5000  
-# Получите подсказку о том, что нужно использовать порт 8090
-```
-
-## Лицензия
-
-Этот проект распространяется под лицензией MIT (подробности в файле `LICENSE`).
