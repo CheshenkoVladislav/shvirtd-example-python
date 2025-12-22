@@ -21,6 +21,7 @@ else
         if [[ "$command_output" == *"already exists"* ]]; then
             echo "Репозиторий уже склонирован."
             if [ -d "shvirtd-example-python" ] ; then
+                git pull origin main
                 cd "shvirtd-example-python"
                 docker compose up
             fi

@@ -13,22 +13,24 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    healthcheck:
-      test: ["CMD", "mysql", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}", "-e", "use virtd"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
+    # healthcheck:
+    #   test: ["CMD", "mysql", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}", "-e", "use virtd"]
+    #   interval: 5s
+    #   timeout: 5s
+    #   retries: 5
+    #   start_period: 30s
     networks:
       backend:
         ipv4_address: 172.20.0.10
 
   web:
+    # build: 
+    #   context: .
+    #   dockerfile: Dockerfile.python
     image: cr.yandex/crpbong86ncpuv4ibhr6/mainpy:latest
     restart: always
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     env_file:
       - .env
     environment:

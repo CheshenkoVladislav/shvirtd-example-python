@@ -34,6 +34,7 @@ async def lifespan(app: FastAPI):
             cursor.close()
     except mysql.connector.Error as err:
         print(f"Ошибка при подключении к БД или создании таблицы: {err}")
+        raise err
     
     yield
     
