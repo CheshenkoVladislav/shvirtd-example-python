@@ -6,7 +6,7 @@ services:
     networks:
         - backend
     ports:
-    - "127.0.0.1:8080:8080"
+    - "8080:8080"
     configs:
     - source: haproxy_config
       target: /usr/local/etc/haproxy/haproxy.cfg
